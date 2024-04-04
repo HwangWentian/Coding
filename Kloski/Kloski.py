@@ -7,9 +7,9 @@ from os import system
 class Kloski:
     def __init__(self):
         self.bd = [[0, 0, 0, 0],
-                      [0, 0, 0, 0],
-                      [0, 0, 0, 0],
-                      [0, 0, 0, 0]]
+                   [0, 0, 0, 0],
+                   [0, 0, 0, 0],
+                   [0, 0, 0, 0]]
         
         seed(time())
         for i in range(1, 16):
@@ -23,6 +23,8 @@ class Kloski:
             for b in range(0, 4):
                 if not self.bd[a][b]:
                     self.posi_0 = [a, b]
+        
+        self.moves = 0
     
     def show(self):
         system("cls")
@@ -35,6 +37,9 @@ class Kloski:
                         print(" ", end="")
                     print(j, end="  ")
             print()
+        
+        if self.moves:
+            print(self.moves, "moves")
 
     def move(self, dir):
         a = self.posi_0
@@ -42,18 +47,22 @@ class Kloski:
             self.bd[a[0]][a[1]] = self.bd[a[0] + 1][a[1]]
             self.bd[a[0] + 1][a[1]] = 0
             self.posi_0[0] += 1
+            self.moves += 1
         elif dir == "d" and a[0] != 0:
             self.bd[a[0]][a[1]] = self.bd[a[0] - 1][a[1]]
             self.bd[a[0] - 1][a[1]] = 0
             self.posi_0[0] -= 1
+            self.moves += 1
         elif dir == "l" and a[1] != 3:
             self.bd[a[0]][a[1]] = self.bd[a[0]][a[1] + 1]
             self.bd[a[0]][a[1] + 1] = 0
             self.posi_0[1] += 1
+            self.moves += 1
         elif dir == "r" and a[1] != 0:
             self.bd[a[0]][a[1]] = self.bd[a[0]][a[1] - 1]
             self.bd[a[0]][a[1] - 1] = 0
             self.posi_0[1] -= 1
+            self.moves += 1
 
     def ifOver(self):
         goal = [[1, 2, 3, 4],
@@ -71,13 +80,16 @@ def op(key):
         return False
     elif key == kb.Key.up:
         kloski.move("u")
+        kloski.show()
     elif key == kb.Key.left:
         kloski.move("l")
+        kloski.show()
     elif key == kb.Key.right:
         kloski.move("r")
+        kloski.show()
     elif key == kb.Key.down:
         kloski.move("d")
-    kloski.show()
+        kloski.show()
     if kloski.ifOver():
         print("You win")
         return False
