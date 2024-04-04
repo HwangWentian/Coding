@@ -65,11 +65,15 @@ class Kloski:
             self.moves += 1
 
     def ifOver(self):
-        goal = [[1, 2, 3, 4],
-                [5, 6, 7, 8],
-                [9, 10, 11, 12],
-                [13, 14, 15, 0]]
-        if self.bd == goal:
+        goal_1 = [[1, 2, 3, 4],
+                  [5, 6, 7, 8],
+                  [9, 10, 11, 12],
+                  [13, 14, 15, 0]]
+        goal_2 = [[1, 2, 3, 4],
+                  [8, 7, 6, 5],
+                  [9, 10, 11, 12],
+                  [0, 15, 14, 13]]
+        if self.bd == goal_1 or self.bd == goal_2:
             return True
         return False
 
