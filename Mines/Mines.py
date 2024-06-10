@@ -56,7 +56,7 @@ def show(field:list, ended=False) -> None:
                     if i <= 24 and field[row][i+1][0] == " ": print("  ", end="")
                     else:                                     print(" ", end=clr("|", 0))
         print(clr(str(row + 1), 1))
-    print(clr("   A B C D E F G H I J K L M N O P Q R S T U V W X Y Z", 1)
+    print(clr("   A B C D E F G H I J K L M N O P Q R S T U V W X Y Z", 1))
 
 def count(field:list, x:int, y:int) -> int:
     num = 0
