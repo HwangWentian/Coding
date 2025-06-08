@@ -39,7 +39,24 @@ def audio_visualization_hsl(file_path):
     plt.figure(figsize=(S_db.shape[1] / dpi, S_db.shape[0] / dpi))
     plt.imshow(rgb_data, aspect='auto', origin='lower', 
                extent=[times[0], times[-1], freqs[0], freqs[-1]])
-
+    
+    # 设置更细致的刻度和网格
+    ax = plt.gca()
+    
+    # 设置x轴（时间轴）的刻度和标签
+    duration = times[-1]
+    major_ticks = np.arange(0, duration, 5)  # 每5秒一个主刻度
+    minor_ticks = np.arange(0, duration, 1)  # 每1秒一个次刻度
+    
+    ax.set_xticks(major_ticks)
+    ax.set_xticks(minor_ticks, minor=True)
+    ax.set_xticklabels([f"{int(t)}s" for t in major_ticks])
+    
+    # 设置y轴（频率轴）的刻度和标签
+    freq_major_ticks = np.linspace(freqs[0], freqs[-1], 10)
+    ax.set_yticks(freq_major_ticks)
+    ax.set_yticklabels([f"{int(f)} Hz" for f in freq_major_ticks])
+    
     # 保存图像到相同路径
     base_path, ext = os.path.splitext(file_path)
     output_path = f"{base_path}_visualization.png"
